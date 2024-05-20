@@ -5,13 +5,13 @@ export const runtime = 'edge'
 
 export async function GET(request: NextRequest) {
 
-	const COUNTRY_MAP = {
-		0: "US",
-		1: "FR",
-		2: "ES",
-		3: "DE",
-		4: "JP",
-	}
+	const COUNTRY_MAP: {[key: string]: string } =  {
+		0: "Thank you for cominng, please come again!",
+		1: "Merci d'être venu, revenez s'il vous plaît!",
+		2: "¡Gracias por venir, por favor vuelve!",
+		3: "„Danke für Ihr Kommen, bitte kommen Sie wieder!",
+		4: "「来てくれてありがとう、また来てね！」",
+	};
 
 	let random_pick = Math.floor ((Math.random () * 10)) % 5;
 	let body = {};
@@ -24,8 +24,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	const OUTPUT = {
-		result: message + " " + country_response (COUNTRY_MAP[random_pick]),
-		country: COUNTRY_MAP[random_pick],
+		result: message + " " + COUNTRY_MAP [random_pick],
 	};
 
 	return new Response (JSON.stringify (OUTPUT), {
@@ -35,13 +34,4 @@ export async function GET(request: NextRequest) {
 	});
 }
 
-function country_response (country) {
-	const COUNTRY_LOOKUP_TABLE = {
-		US: "Thank you for cominng, please come again!",
-		FR: "Merci d'être venu, revenez s'il vous plaît!",
-		ES: "¡Gracias por venir, por favor vuelve!",
-		DE: "„Danke für Ihr Kommen, bitte kommen Sie wieder!",
-		JP: "「来てくれてありがとう、また来てね！」",
-	};
-	return  (COUNTRY_LOOKUP_TABLE[country]);
-}
+
